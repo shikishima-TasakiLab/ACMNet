@@ -9,10 +9,10 @@ class BaseOptions():
     def __init__(self):
         self.initialized = False
 
-    def initialize(self, parser):
+    def initialize(self, parser: argparse.ArgumentParser):
         parser.add_argument('--root', type=str, default='datasets', help='path to dataset')
         parser.add_argument('--dataset', type=str, default='kitti', help='dataset name')
-        parser.add_argument('--test_data_file', type=str, default='sval.list', help='validatation data list')
+        parser.add_argument('--test_data_file', type=str,  default='sval.list', help='validatation data list')
         parser.add_argument('--train_data_file', type=str, default='train.list', help='validatation data list')
         parser.add_argument('--batchSize', type=int, default=1, help='input batch size')
         parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
@@ -30,6 +30,16 @@ class BaseOptions():
         parser.add_argument('--init_gain', type=float, default=0.02, help='scaling factor for normal, xavier and orthogonal.')
         parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are saved here')
         parser.add_argument('--suffix', default='', type=str, help='customized suffix: opt.name = opt.name + suffix: e.g., {model}_{which_model_netG}_size{loadSize}')
+
+        parser_add = parser.add_argument_group('Add')
+        parser_add.add_argument('-tdc', f'--train_dl_config', type=str, metavar='PATH', required=True, help='PATH of JSON file of dataloader config for training.')
+        parser_add.add_argument('-vdc', f'--val_dl_config', type=str, metavar='PATH', default=None, help=f'PATH of JSON file of dataloader config for validation. If not specified, the same file as "--train_dl_config" will be used.')
+        parser_add.add_argument('-bs', f'--block_size', type=int, default=0, help='Block size of dataset.')
+        parser_add.add_argument('-td', f'--train_data', type=str, metavar='PATH', nargs='+', required=True, help='PATH of training HDF5 datasets.')
+        parser_add.add_argument('-vd', f'--val_data', type=str, metavar='PATH', nargs='*', default=[], help=f'PATH of validation HDF5 datasets. If not specified, the same files as "--train_data" will be used.')
+        parser_add.add_argument(f'--tr_err_range', type=float, nargs=3, default=[0.6, 1.3, 0.7], help='Translation Error Range [m].')
+        parser_add.add_argument(f'--rot_err_range', type=float, default=3.0, help='Rotation Error Range [deg].')
+
         self.initialized = True
         return parser
 
@@ -84,7 +94,7 @@ class BaseOptions():
         if opt.suffix:
             suffix = ('_' + opt.suffix.format(**vars(opt))) if opt.suffix != '' else ''
             opt.expr_name = opt.expr_name + suffix
-        
+
         if opt.isTrain:
             self.print_options(opt)
 

@@ -1,7 +1,7 @@
 import time
 import torch.nn
 from options.train_options import TrainOptions
-from data import create_dataloader
+from data import create_dataloader, create_h5_dataloader
 from models import create_model
 from util import SaveResults
 import numpy as np
@@ -9,8 +9,9 @@ import cv2
 
 if __name__ == '__main__':
     opt = TrainOptions().parse()
-    train_data_loader = create_dataloader(opt)
-    train_dataset_size = len(train_data_loader)   
+    # train_data_loader = create_dataloader(opt)
+    train_data_loader = create_h5_dataloader(opt)
+    train_dataset_size = len(train_data_loader)
     print('#training images = %d' % train_dataset_size)
 
     model = create_model(opt)
