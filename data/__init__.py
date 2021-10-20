@@ -87,6 +87,6 @@ def create_h5_test_dataloader(args):
 
 def create_h5_dataloader(args):
     if not args.isTrain:
-        return create_h5_train_dataloader(args)
-    else:
         return create_h5_test_dataloader(args)
+    else:
+        return create_h5_train_dataloader(args)

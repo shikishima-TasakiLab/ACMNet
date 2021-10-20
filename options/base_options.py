@@ -32,13 +32,14 @@ class BaseOptions():
         parser.add_argument('--suffix', default='', type=str, help='customized suffix: opt.name = opt.name + suffix: e.g., {model}_{which_model_netG}_size{loadSize}')
 
         parser_add = parser.add_argument_group('Add')
-        parser_add.add_argument('-tdc', f'--train_dl_config', type=str, metavar='PATH', required=True, help='PATH of JSON file of dataloader config for training.')
+        parser_add.add_argument('-tdc', f'--train_dl_config', type=str, metavar='PATH', help='PATH of JSON file of dataloader config for training.')
         parser_add.add_argument('-vdc', f'--val_dl_config', type=str, metavar='PATH', default=None, help=f'PATH of JSON file of dataloader config for validation. If not specified, the same file as "--train_dl_config" will be used.')
         parser_add.add_argument('-bs', f'--block_size', type=int, default=0, help='Block size of dataset.')
-        parser_add.add_argument('-td', f'--train_data', type=str, metavar='PATH', nargs='+', required=True, help='PATH of training HDF5 datasets.')
+        parser_add.add_argument('-td', f'--train_data', type=str, metavar='PATH', nargs='+', help='PATH of training HDF5 datasets.')
         parser_add.add_argument('-vd', f'--val_data', type=str, metavar='PATH', nargs='*', default=[], help=f'PATH of validation HDF5 datasets. If not specified, the same files as "--train_data" will be used.')
         parser_add.add_argument(f'--tr_err_range', type=float, nargs=3, default=[0.6, 1.3, 0.7], help='Translation Error Range [m].')
         parser_add.add_argument(f'--rot_err_range', type=float, default=3.0, help='Rotation Error Range [deg].')
+        parser_add.add_argument('-ppa', f'--prj_pos_aug', action='store_false', help='Unuse Localization Error Augmentation')
 
         self.initialized = True
         return parser
