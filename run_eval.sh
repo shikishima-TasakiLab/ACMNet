@@ -7,4 +7,4 @@
 # python val.py --model test --channels 64 --model_path model_64.pth --clip --knn 6 6 6 --nsamples 10000 5000 2500 #--save # use if saving the results
 #python val.py --model test --channels 64 --model_path model_64.pth --clip --knn 6 6 6 --nsamples 10000 5000 2500 --flip_input # helpful to reduce the error, as GuideNet did.#--save # use if saving the results
 
-python val.py --model test --channels 64 --knn 6 6 6 --nsamples 10000 5000 2500 -vd datasets/kitti360_seq03.hdf5 -vdc datasets/kitti360_acmnet_val.json -bs 16
+python val.py --model test --channels 64 --knn 6 6 6 --nsamples 10000 5000 2500 -vd datasets/kitti360_seq03.hdf5 -vdc datasets/kitti360_acmnet_val.json -bs 16 --save

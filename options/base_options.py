@@ -11,7 +11,7 @@ class BaseOptions():
 
     def initialize(self, parser: argparse.ArgumentParser):
         parser.add_argument('--root', type=str, default='datasets', help='path to dataset')
-        parser.add_argument('--dataset', type=str, default='kitti', help='dataset name')
+        parser.add_argument('--dataset', type=str, default='', help='dataset name')
         parser.add_argument('--test_data_file', type=str,  default='sval.list', help='validatation data list')
         parser.add_argument('--train_data_file', type=str, default='train.list', help='validatation data list')
         parser.add_argument('--batchSize', type=int, default=1, help='input batch size')

@@ -79,7 +79,7 @@ def create_h5_test_dataloader(args):
         test_use_mods = (args.block_size - 1, args.block_size)
 
     dataset = H5_Test_Dataset(
-        h5_paths=args.train_data, config=args.train_dl_config, quiet=True,
+        h5_paths=args.val_data, config=args.val_dl_config, quiet=True,
         block_size=args.block_size, use_mods=test_use_mods,
     )
 
