@@ -89,13 +89,13 @@ class SaveResults:
                 #     image *= 255
                 #     depth_numpy = tensor2depth(image, imtype=np.uint16)
                 #     cv2.imwrite(img_path, depth_numpy)
-                image_np = image.cpu().numpy()
+                image_np = image[0].cpu().detach().numpy().squeeze()
                 img = cv2.applyColorMap((image_np * 255.0).astype(np.uint8), cv2.COLORMAP_JET)
                 img[image_np > 1.0] = [0, 0, 0]
                 cv2.imwrite(img_path, img)
             else:
-                img = image.cpu().numpy().squeeze.transpose(1, 2, 0)
-                cv2.imwrite(img_path, img)
+                img = image[0].cpu().detach().numpy().squeeze().transpose(1, 2, 0) * 255.0
+                cv2.imwrite(img_path, img.astype(np.uint8))
                 # image_numpy = tensor2im(image)
                 # save_image(image_numpy, img_path, 'RGB')
 
