@@ -21,6 +21,8 @@ if __name__ == '__main__':
 
     lr = opt.lr
 
+    steps_per_epoch = opt.batchSize * 2500 if len(train_data_loader) > opt.batchSize * 2500 else len(train_data_loader)
+
     for epoch in range(opt.epoch_count, opt.niter + 1):
         epoch_start_time = time.time()
         iter_data_time = time.time()
@@ -28,7 +30,9 @@ if __name__ == '__main__':
 
         # training
         print("training stage (epoch: %s) starting...................." % epoch)
-        for ind, data in enumerate(train_data_loader):
+        for ind in range(steps_per_epoch):
+            data = next(iter(train_data_loader))
+
             iter_start_time = time.time()
             if total_steps % opt.print_freq == 0:
                 t_data = iter_start_time - iter_data_time
