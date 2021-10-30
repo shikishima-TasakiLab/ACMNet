@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import os
 import util
 import torch
@@ -90,7 +91,7 @@ class BaseOptions():
         opt = self.gather_options()
         opt.isTrain = self.isTrain
 
-        opt.expr_name = opt.dataset + '_' + opt.model
+        opt.expr_name = datetime.datetime.now().strftime('%Y%m%dT%H%M%S') + '_' + opt.dataset + '_' + opt.model
         # process opt.suffix
         if opt.suffix:
             suffix = ('_' + opt.suffix.format(**vars(opt))) if opt.suffix != '' else ''
