@@ -8,6 +8,11 @@ import numpy as np
 import cv2
 
 if __name__ == '__main__':
+    np.random.seed(seed=0)
+    torch.random.manual_seed(seed=0)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed=0)
+
     opt = TrainOptions().parse()
     # train_data_loader = create_dataloader(opt)
     train_data_loader = create_h5_dataloader(opt)
