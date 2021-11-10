@@ -103,8 +103,8 @@ def main():
 
         sum_ae += np.sum(np.abs(pred - gt))
         sum_se += np.sum((pred - gt) ** 2.0)
-        sum_iae += np.sum(np.abs(1.0 / pred - 1e3 / gt))
-        sum_ise += np.sum((1.0 / pred - 1.0 / gt) ** 2.0)
+        sum_iae += np.nansum(np.abs(1.0 / pred - 1e3 / gt))
+        sum_ise += np.nansum((1.0 / pred - 1.0 / gt) ** 2.0)
         sum_ape += np.sum(np.abs(pred - gt) / gt)
         cnt += np.sum(mask)
 
