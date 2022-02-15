@@ -1,7 +1,7 @@
 #!/bin/bash
 RUN_DIR=$(dirname $(readlink -f $0))
 PKG_DIR=$(dirname ${RUN_DIR})
-SRC_IMAGE=""
+SRC_IMAGE="pytorch/pytorch:1.7.0-cuda11.0-cudnn8-devel"
 DST_IMAGE="acmnet"
 function usage_exit {
   cat <<_EOS_ 1>&2
